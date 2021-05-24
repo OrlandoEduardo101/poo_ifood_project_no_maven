@@ -3,10 +3,9 @@ package modules.home.presenter;
 import di.InjectionDependency;
 import modules.auth.presenter.Auth;
 import modules.home.domain.errors.IHomeException;
-import modules.sale.presenter.SalePage;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import modules.sale.presenter.SalePage;
 
 public class HomePage {
 
