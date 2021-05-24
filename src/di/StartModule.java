@@ -18,6 +18,12 @@ import modules.home.infra.datasource.IHomeDatasource;
 import modules.home.infra.repositories.HomeRepository;
 import modules.home.presenter.HomeController;
 import AuthStore.AuthStore;
+import modules.sale.domain.repositories.ISaleRepository;
+import modules.sale.domain.usecases.CreatePurchasetUsecase;
+import modules.sale.external.datasources.SaleDatasource;
+import modules.sale.infra.datasources.ISaleDatasource;
+import modules.sale.infra.repositories.SaleRepository;
+import modules.sale.presenter.SaleControler;
 
 public class StartModule {
     public InjectionDependency serviceLocator = InjectionDependency.getInstance();
@@ -85,7 +91,23 @@ public class StartModule {
                 (ListMyAnnouncementUsecase) serviceLocator.get("IListMyAnnouncementUsecase")
                 ));
 
+        /* Sale Binds */
 
+        //external
+        serviceLocator.register("ISaleDatasource", SaleDatasource.getInstance());
+
+        //infra
+        serviceLocator.register("ISaleRepository", SaleRepository.getInstance((ISaleDatasource) serviceLocator.get("ISaleDatasource")));
+
+        //domain
+        serviceLocator.register("ICreatePurchasetUsecase", CreatePurchasetUsecase.getInstance((ISaleRepository) serviceLocator.get("ISaleRepository")));
+
+        //presenter
+        serviceLocator.register("SaleController", new SaleControler(
+                (AuthStore) serviceLocator.get("AuthStore"),
+                (CreatePurchasetUsecase) serviceLocator.get("ICreatePurchasetUsecase"),
+                (ListAllAnnouncementUsecase) serviceLocator.get("IListAllAnnouncementUsecase")
+        ));
 
 
     }

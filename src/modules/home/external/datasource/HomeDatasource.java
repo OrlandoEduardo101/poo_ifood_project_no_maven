@@ -36,6 +36,7 @@ public class HomeDatasource implements IHomeDatasource {
 
     Map<Integer, Map<String, Object>> announcementList = new HashMap<Integer, Map<String, Object>>();
 
+    //fill database with mock data
     public void fillDataBase() {
         MealModel hamburger = new MealModel();
         MealModel hamburger2 = new MealModel();

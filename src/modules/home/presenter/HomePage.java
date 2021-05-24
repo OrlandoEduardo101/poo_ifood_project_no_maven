@@ -3,6 +3,7 @@ package modules.home.presenter;
 import di.InjectionDependency;
 import modules.auth.presenter.Auth;
 import modules.home.domain.errors.IHomeException;
+import modules.sale.presenter.SalePage;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,7 +23,8 @@ public class HomePage {
                 System.out.println("[1] List All Annoucement");
                 System.out.println("[2] List My Annoucement");
                 System.out.println("[3] Delete My Annoucement");
-                System.out.println("[4] to exit");
+                System.out.println("[4] Purchase a Product");
+                System.out.println("[5] to exit");
                 option = scanner.nextInt();
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
@@ -31,7 +33,7 @@ public class HomePage {
                 scanner.nextLine(); // discard input so user can try again
                 System.out.printf("You must only numbers. Please try again.%n%n");
             }
-        } while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4);
+        } while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5);
 
         if (option == 0) {
             System.out.println("[0] Create Annoucement ");
@@ -85,7 +87,12 @@ public class HomePage {
             //menu();
             //return;
         } else if (option == 4) {
-            System.out.println("[4] to exit");
+            System.out.println("[4] Purchase a Product");
+            new SalePage().buyPage();
+            menu();
+            //return;
+        } else if (option == 5) {
+            System.out.println("[5] to exit");
             new Auth().loginOrResgister();
             //return;
         }
